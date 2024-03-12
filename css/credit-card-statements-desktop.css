@@ -1,0 +1,347 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+    font-size: 10px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+
+    --teal-blue: #1693a5;
+	--turquoise: #45b5c4;
+	--aquamarine: #7ececa;
+	--seafoam-green: #a0ded6;
+	--pale-aqua: #c7ede8;
+	--white: #fff;
+	--light-gray: #dfdfdf;
+	--keppel: #2ebfa5;
+	--mint-green: #caf3be;
+	--dodger-blue: #3083dc;
+	--red: #e90909;
+	--white-gray: #f1f1f1;
+	--silver: #a5a5a5;
+    --black: #000;
+
+    --font_small: 1.2rem;
+    --font_medium: 1.4rem;
+    --font_normal: 1.6rem;
+    --font_large: 1.8rem;
+    --font_xlarge: 2rem;
+}
+
+@media screen and (min-width: 1280px) {
+    .app {
+        display: grid;
+        grid-template-columns: 80px 1fr;
+        grid-template-rows: 80px 1fr;
+        height: 100vh;
+    }
+
+    header {
+        grid-column: 2;
+        grid-row: 1;
+    }
+     
+    main {
+        grid-column: 2;
+        grid-row: 2;
+    }
+    
+    .page-menu {
+        grid-column: 1;
+        grid-row: 1 / 3 ;
+    }
+}
+
+@media screen and (max-width: 1279px) and (min-width: 768px) {
+    /* Estilos para telas entre 768px e 1279px de largura */
+}
+
+@media screen and (max-width: 767px) {
+    /* Estilos para telas menores ou iguais a 767px de largura */
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.app {
+    width: 100%;
+    height: 100%;
+    transition: 0.2s;
+}
+
+.app:has(.page-menu.expand) {
+    grid-template-columns: 28rem 1fr;
+}
+
+.app:has(.page-menu.expand) header{
+    width: calc(100% - 28rem);
+    left: 28rem
+}
+
+
+.button {
+    cursor: pointer;
+}
+
+.header-container {
+    max-width: 1280px;
+    margin: auto;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+header {
+    position: fixed;
+    left: 80px;
+    height: 80px;
+    width: calc(100% - 80px);
+    transition: 0.2s
+}
+
+header.scrolled {
+    background-color: rgba(223, 223, 223, 0.9);
+}
+
+.page-title .title {
+    font-size: var(--font_xlarge);
+    font-weight: 500;
+}
+
+.page-menu {
+    position: fixed;
+    height: 100%;
+    width: 80px;
+    background-color: var(--dodger-blue);
+    transition: 0.2s;
+}
+
+.page-menu.expand {
+    width: 28rem;
+}
+
+.container-button-menu {
+    padding-top: 1rem;
+    height: 7rem;
+    border-bottom: 1px solid var(--white-gray);
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+}
+
+.button-menu {
+    background-color: transparent;
+    border: none;
+    color: var(--white);
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+}
+
+.button-menu:hover {
+    background-color: var(--white-gray);
+    color: var(--dodger-blue);
+}
+
+.button-new-register {
+    height: 5.6rem;
+    width: 5.6rem;
+    margin-left: 1.2rem;
+    border-radius: 1.5rem;
+    color: var(--dodger-blue);
+    background-color: var(--white);
+    border: none;
+    box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+    font-weight: 550;
+    transition: 0.2s;
+    display: grid;
+    grid-template-columns: 5.6rem 1fr;
+    align-items: center;
+    text-align: left;
+    overflow: hidden;
+}
+
+.button-new-register:hover {
+    box-shadow: 0 0.5rem 2rem  rgba(0, 0, 0, 0.4);
+}
+
+.button-new-register .icon {
+    font-size: 2.4rem;
+    margin: 1.6rem;
+}
+
+.button-new-register .text{
+    width: 10rem;
+}
+
+.page-menu.expand .button-new-register {
+    width: 17rem;
+}
+
+.credit-card-statements-container {
+    padding: 0  2rem 0  2rem;
+    margin: 5rem auto auto auto;
+    max-width: 1280px;
+    background-color: var(--white);
+    border-radius: 1rem;
+    font-size: var(--font_normal);
+}
+
+.credit-card-statements-menu {
+    height: 8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 20% 0 20%;
+    border-top: 1px solid var(--light-gray);
+    border-bottom: 1px solid var(--light-gray);
+}
+
+.credit-card-statements-menu .menu-item {
+    font-size: var(--font_large);
+}
+
+.credit-card-statements-menu .current {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+}
+
+.credit-card-statements-menu .current-info {
+    font-size: var(--font_medium);
+}
+
+.credit-card-statements-filters {
+    min-height: 6rem;
+    display: flex;
+    align-items: center;
+    border-top: 1px solid var(--light-gray);
+}
+
+.credit-card-statements-filters button {
+    background-color: var(--light-gray);
+    border: none;
+    height: 4rem;
+    padding: 0 2.4rem 0 1.6rem;
+    border-radius: 2rem;
+    font-size: var(--font_medium);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.credit-card-statements-filters .icon {
+    font-size: var(--font_medium);
+}
+
+.credit-card-statements {
+    display: flex;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.credit-card-statement {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 10rem;
+    margin: auto;
+}
+
+.credit-card-statement .statement-name  {
+   display: flex;
+   align-items: center;
+}
+
+.credit-card-statement .statement-name .icon {
+    font-size: var(--font_medium);
+}
+
+.credit-card-statement .statement-value {
+    font-size: var(--font_xlarge);
+    font-weight: 600;
+}
+
+.credit-card-statement .statement-status, .credit-card-statement .statement-due-date{
+    color: var(--silver);
+    font-size: var(--font_medium);
+}
+
+.credit-card-statement-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-weight: 400;
+}
+
+.credit-card-statement-table tr {
+    height: 7rem;
+}
+
+.credit-card-statement-table thead tr {
+    height: 4rem;
+    font-size: var(--font_medium);
+    color: #3b3b3b;
+}
+
+.credit-card-statement-table th{
+    text-align:left;
+}
+
+.container-button-total-menu {
+    border-radius: 50%;
+    height: 3.4rem;
+    width: 3.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-button-total-menu .icon {
+    margin: auto;
+}
+
+.container-button-total-menu:hover {
+    background-color: var(--white-gray);
+}
+
+.credit-card-statement-total {
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 1rem;
+}
+
+.credit-card-statement-table tr:nth-child(n+1){
+    border-top: 1px solid var(--light-gray);
+}
+
+.credit-card-statement-table tr >:nth-child(3) {
+    width: 30%;
+}
+
+.credit-card-statement-table tr >:nth-child(4) {
+    width: 20%;
+} 
+
+.credit-card-statement-table tr >:nth-child(5) {
+    width: 15%;
+} 
+
+.credit-card-statement-table .statement-date {
+    color: var(--silver);
+}
+
+.credit-card-statement-table .statement-category div {
+    height: 4rem;
+    width: 4rem;
+    background-color: var(--light-gray);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
