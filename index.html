@@ -10,10 +10,13 @@
     <!-- <link rel="stylesheet" media="screen and (min-width: 1280px)" href="./css/statements-desktop.css">
     <link rel="stylesheet" media="screen and (min-width: 600px) and (max-width: 1279px)" href="./css/statements-tablet.css">
     <link rel="stylesheet" media="screen and (max-width: 599px)" href="./css/statements-mobile.css"> -->
+    <script src="./js/moment-with-locales.js" defer></script>
     <script src="./js/menu.js" defer></script>
+    <script src="./js/credit-card-statements.js" defer></script>
 </head>
 <body>
     <div class="app">
+        <div class="pop-up"></div>
         <header>
            <div class="header-container">
                 <div class="page-title">
@@ -33,27 +36,22 @@
         <main>
             <div class="credit-card-statements-container">
                 <div class="credit-card-statements-header">
-                    <nav class="credit-card-statements-menu">
-                        <span class="menu-item button">DEZ 23</span>
-                        <span class="material-symbols-outlined icon">chevron_left</span>
-                        <span class="menu-item current"><span class="current-month">JAN</span><span class="current-info">Fatura atual</span></span>
-                        <span class="material-symbols-outlined icon">chevron_right</span>
-                        <span class="menu-item button">FEV</span>
-                    </nav>
+                    <div class="container-credit-card-statements-menu">
+                        <nav class="credit-card-statements-menu">
+                            <button type="button" class="menu-item button previous">DEZ 23</button>
+                            <button type="button" class="material-symbols-outlined icon button previous" aria-label="Mês anterior">chevron_left</button>
+                            <span class="menu-item current">
+                                <span class="current-month">JAN</span>
+                                <span class="current-info">Fatura atual</span>
+                            </span>
+                            <button type="button" class="material-symbols-outlined icon button next" aria-label="Próximo mês">chevron_right</button>
+                            <button type="button" class="menu-item button next">FEV</button>
+                        </nav>
+                    </div>
                     <div class="credit-card-statements">
                         <div class="credit-card-statement">
                             <span class="statement-name">
-                                <span>Nubank</span>
-                                <span class="material-symbols-outlined icon">page_info</span>
-                            </span>
-                            <span class="statement-value">R$ 4500,00</span>
-                            <span class="statement-status">Fechamento em <strong>7 JAN</strong></span>
-                            <span class="statement-due-date">Vencimento em <strong>15 JAN</strong></span>
-                        </div>
-                        <div class="credit-card-statement">
-                            <span class="statement-name">
-                                <span>Next</span> 
-                                <span class="material-symbols-outlined icon">page_info</span>
+                                <span>Next</span>
                             </span>
                             <span class="statement-value">R$ 4500,00</span>
                             <span class="statement-status">Fechada</span>
@@ -61,8 +59,15 @@
                         </div>
                         <div class="credit-card-statement">
                             <span class="statement-name">
-                                <span>Will</span>    
-                                <span class="material-symbols-outlined icon">page_info</span>
+                                <span>Next</span>
+                            </span>
+                            <span class="statement-value">R$ 4500,00</span>
+                            <span class="statement-status">Fechada</span>
+                            <span class="statement-due-date">Vencimento em <strong>12 JAN</strong></span>
+                        </div>
+                        <div class="credit-card-statement">
+                            <span class="statement-name">
+                                <span>Will</span>
                             </span>
                             <span class="statement-value">R$ 4500,00</span>
                             <span class="statement-status">Fechamento em <strong>9 JAN</strong></span>
@@ -87,9 +92,10 @@
                                 <th></th>
                                 <th class="credit-card-statement-total">
                                     <span class="value">R$ 15.000,00</span>
-                                   <div class="container-button-total-menu">
-                                      <span class="material-symbols-outlined icon button credit-card-statement-total-menu"> more_vert</span>
-                                   </div>
+                                    <div class="container-button-total-menu select-none">
+                                        <span class="material-symbols-outlined icon button credit-card-statement-total-menu">more_vert</span>
+                                    </div>
+                                    <div class="pop-up-button-total-menu"></div>
                                 </th>
                             </tr>
                         </thead>
