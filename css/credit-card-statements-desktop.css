@@ -20,6 +20,7 @@
 	--red: #e90909;
 	--white-gray: #f1f1f1;
 	--silver: #a5a5a5;
+    --silver-black: #2e2e2e;
     --black: #000;
 
     --font_small: 1.2rem;
@@ -27,6 +28,14 @@
     --font_normal: 1.6rem;
     --font_large: 1.8rem;
     --font_xlarge: 2rem;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 48
 }
 
 @media screen and (min-width: 1280px) {
@@ -65,6 +74,7 @@
 * {
     padding: 0;
     margin: 0;
+    outline: none;
 }
 
 .app {
@@ -89,8 +99,8 @@
 
 .header-container {
     max-width: 1280px;
+    height: 100%;
     margin: auto;
-    padding: 2rem;
     display: flex;
     align-items: center;
 }
@@ -106,6 +116,57 @@ header {
 
 header.scrolled {
     background-color: rgba(223, 223, 223, 0.9);
+}
+
+.pop-up {
+    position: fixed;
+    z-index: 9999;
+    width: 100vw;
+    height: 100vh; 
+    display: none; 
+}
+
+.pop-up.active{
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pop-up-page {
+    background-color: var(--white);
+    width: 100rem;
+    height: 70rem;
+    display: grid;
+    border-radius: 1rem;
+    grid-template-rows: 4rem 1fr;
+}
+
+.pop-up-page-menu {
+    display: grid;
+    grid-template-columns: 1fr 4rem;
+    align-items: center;
+    border-bottom: 1px solid var(--light-gray);
+}
+.pop-up-page-menu .text {
+    padding-left: 1rem;
+    font-size: var(--font_normal);
+}
+
+.pop-up-page-menu .action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+}
+
+.select-none {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera, Firefox */
 }
 
 .page-title .title {
@@ -126,14 +187,16 @@ header.scrolled {
 }
 
 .container-button-menu {
-    padding-top: 1rem;
-    height: 7rem;
+    height: 8rem;
     border-bottom: 1px solid var(--white-gray);
     margin-bottom: 2rem;
-    padding-left: 2rem;
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+    justify-content: center;
 }
 
 .button-menu {
+    margin: auto;
     background-color: transparent;
     border: none;
     color: var(--white);
@@ -205,7 +268,8 @@ header.scrolled {
     align-items:start;
     padding-top: 1.5rem;
     justify-content: space-around;
-}
+    overflow: hidden;
+} 
 
 .credit-card-statements-menu button {
     background-color: transparent;
@@ -230,12 +294,12 @@ header.scrolled {
 
 .credit-card-statements-filters {
     min-height: 6rem;
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 10rem 1fr 3rem;
     border-top: 1px solid var(--light-gray);
 }
 
-.credit-card-statements-filters button {
+.credit-card-statements-filters .button-filter {
     background-color: var(--light-gray);
     border: none;
     height: 4rem;
@@ -247,8 +311,146 @@ header.scrolled {
     gap: 0.8rem;
 }
 
+.credit-card-statements-filters .button-filter:hover {
+    background-color: var(--white-gray);
+}
+
+.credit-card-statements-filters .filters {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    gap: 0.8rem;
+
+}
+
+.credit-card-statements-filters .container-filters  {
+    height: 6rem;
+    display: flex;
+    align-items: center;
+}
+
+.credit-card-statements-filters .filters span {
+    background-color: var(--light-gray);
+    border-radius: 2rem;
+    padding: .5rem 1rem .5rem 1rem;
+
+}
+
+.credit-card-statements-filters-page {
+    overflow-y: auto;
+}
+
+.credit-card-statements-filters-page > * {
+    padding: 2rem;
+    display: grid;
+    grid-template-rows: 3rem 1fr;
+    font-size: var(--font_medium);
+}
+
+.credit-card-statements-filters-page > *:not(:first-child) {
+    border-top: 1.5px solid var(--light-gray);
+ }
+
+.credit-card-statements-filters-page .container-title {
+    font-weight: 500;
+}
+
+.credit-card-statements-filters-page .container-items-filters {
+   display: flex;
+   flex-wrap: wrap;
+   gap: .8rem;
+}
+
+.credit-card-statements-filters-page .container-items-filters > * {
+    padding: .5rem 1rem .5rem 1rem;
+    border-radius: 2rem;
+    border: 2px solid var(--light-gray);
+    color: var(--silver-black);
+}
+
+.credit-card-statements-filters-page .container-items-filters > *.active {
+    background-color: var(--light-gray);
+}
+
+
+.credit-card-statements-filters-page .container-items-filters > *:hover {
+    background-color: var(--light-gray);
+}
+
+.container-button-filter {
+    border-top: 1px solid var(--light-gray);
+    position: sticky;
+    display: flex;
+    gap: 1rem;
+    padding: 2rem 3rem 2rem 1rem;
+    justify-content: flex-end;
+    width: 1fr;
+}
+.container-button-filter button {
+    padding: 1rem 2rem 1rem 2rem;
+    border: 2px solid var(--light-gray);
+    background-color: var(--white);
+    border-radius: 2rem;
+}
+.container-button-filter button.apply:hover { 
+    background-color: var(--keppel);
+    border: 2px solid var(--keppel);
+    color: var(--white);
+}
+
+.container-button-filter button.cancel:hover { 
+    background-color: var(--red);
+    border: 2px solid var(--red);
+    color: var(--white);
+}
+
 .credit-card-statements-filters .icon {
     font-size: var(--font_medium);
+}
+
+.credit-card-statements-filters .container-export {
+    border-radius: 50%;
+    height: 3.4rem;
+    width: 3.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.credit-card-statements-filters .container-export .icon {
+    margin: auto;
+}
+
+.credit-card-statements-filters .container-export:hover {
+    background-color: var(--white-gray);
+}
+
+.credit-card-statements-filters .pop-up-export {
+    display: none;
+}
+
+.credit-card-statements-filters .pop-up-export.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    padding: 1rem 0 1rem 0;
+    background-color: var(--white); 
+    box-shadow: 0 0 0.9rem rgba(0, 0, 0, 0.2);
+    white-space: nowrap;
+    border-radius: .5rem;
+}
+
+.credit-card-statements-filters .pop-up-export * {
+    height: 3rem;
+    text-align: left;
+    width: 100%;
+    border: none;
+    padding: 0 2rem 0 2rem;
+    background-color: transparent;
+}
+
+.pop-up-export *:hover {
+    background-color: var(--white-gray);
 }
 
 .credit-card-statements {
@@ -261,15 +463,19 @@ header.scrolled {
 }
 
 .credit-card-statement {
-    display: flex;
+    display: grid;
     padding: 2rem;
     width: 20rem;
-    flex-direction: column;
     gap: 0.5rem;
-    height: 10rem;
+    height: 13rem;
     margin: auto;
     box-shadow: 0 .2rem 0.8rem rgba(0, 0, 0, 0.2);
     border-radius: 1rem;
+}
+
+.credit-card-statement.disabled {
+    background-color: var(--white-gray);
+    box-shadow: none;
 }
 
 .credit-card-statement .statement-name  {
@@ -286,7 +492,11 @@ header.scrolled {
     font-weight: 600;
 }
 
-.credit-card-statement .statement-status, .credit-card-statement .statement-due-date{
+.credit-card-statement .statement-customer {
+    font-weight: 600;
+}
+
+.credit-card-statement .statement-status, .credit-card-statement .statement-due-date,.credit-card-statement .statement-customer{
     color: var(--silver);
     font-size: var(--font_medium);
 }
@@ -311,38 +521,14 @@ header.scrolled {
     text-align:left;
 }
 
-.container-button-total-menu {
-    border-radius: 50%;
-    height: 3.4rem;
-    width: 3.4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.container-button-total-menu .icon {
-    margin: auto;
-}
-
-.container-button-total-menu:hover {
-    background-color: var(--white-gray);
-}
-
-.credit-card-statement-total {
-    height: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-right: 1rem;
-}
-
 .credit-card-statement-table tr:nth-child(n+1){
     border-top: 1px solid var(--light-gray);
 }
 
 .credit-card-statement-table tr >:nth-child(3) {
-    width: 30%;
+    width: 25%;
 }
+
 
 .credit-card-statement-table tr >:nth-child(4) {
     width: 20%;
@@ -352,72 +538,29 @@ header.scrolled {
     width: 15%;
 } 
 
+
+.credit-card-statement-table tr >:nth-child(6) {
+    width: 10%;
+}  
+
+
 .credit-card-statement-table .statement-date {
     color: var(--silver);
 }
 
-.credit-card-statement-table .statement-category div {
+.credit-card-statement-table .container-category {
+    display: flex;
+    height: 1fr;
+    align-items: center;
+    gap: 1rem;
+}
+
+.credit-card-statement-table .container-icon {
     height: 4rem;
     width: 4rem;
-    background-color: var(--light-gray);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: var(--white);
 } 
-
-.pop-up {
-    position: fixed;
-    z-index: 9999;
-    width: 100vw;
-    height: 100vh; 
-    display: none; 
-}
-
-.pop-up.active{
-    background-color: rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.pop-up-button-total-menu {
-    display: none;
-}
-
-.pop-up-button-total-menu.active {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    transform: translate(1rem,2rem);
-    padding: 1rem 0 1rem 0;
-    background-color: var(--white); 
-    box-shadow: 0 0 0.9rem rgba(0, 0, 0, 0.2);
-    border-radius: .5rem;
-}
-
-.pop-up-button-total-menu * {
-    height: 3rem;
-    text-align: left;
-    width: 100%;
-    border: none;
-    padding: 0 2rem 0 2rem;
-    background-color: transparent;
-}
-
-.pop-up-button-total-menu *:hover {
-    background-color: var(--white-gray);
-}
-
-.select-none {
-    -webkit-touch-callout: none; /* iOS Safari */
-      -webkit-user-select: none; /* Safari */
-       -khtml-user-select: none; /* Konqueror HTML */
-         -moz-user-select: none; /* Firefox */
-          -ms-user-select: none; /* Internet Explorer/Edge */
-              user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera, Firefox */
-}
-
-.credit-card-statements-menu {
-    overflow: hidden;
-}

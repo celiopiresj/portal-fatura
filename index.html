@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fatura</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./css/credit-card-statements-desktop.css">
     <!-- <link rel="stylesheet" media="screen and (min-width: 1280px)" href="./css/statements-desktop.css">
@@ -49,13 +50,14 @@
                         </nav>
                     </div>
                     <div class="credit-card-statements">
-                        <div class="credit-card-statement">
+                        <!-- <div class="credit-card-statement">
                             <span class="statement-name">
                                 <span>Next</span>
                             </span>
                             <span class="statement-value">R$ 4500,00</span>
                             <span class="statement-status">Fechada</span>
                             <span class="statement-due-date">Vencimento em <strong>12 JAN</strong></span>
+                            <span class="statement-customer"></span>
                         </div>
                         <div class="credit-card-statement">
                             <span class="statement-name">
@@ -64,6 +66,7 @@
                             <span class="statement-value">R$ 4500,00</span>
                             <span class="statement-status">Fechada</span>
                             <span class="statement-due-date">Vencimento em <strong>12 JAN</strong></span>
+                            <span class="statement-customer"></span>
                         </div>
                         <div class="credit-card-statement">
                             <span class="statement-name">
@@ -72,234 +75,39 @@
                             <span class="statement-value">R$ 4500,00</span>
                             <span class="statement-status">Fechamento em <strong>9 JAN</strong></span>
                             <span class="statement-due-date">Vencimento em <strong>15 JAN</strong></span>
-                        </div>
+                            <span class="statement-customer"></span>
+                        </div> -->
                     </div>
                     <div class="credit-card-statements-filters">
-                        <button type="button" class="button">
-                            <span class="material-symbols-outlined icon">page_info</span>
-                            <span>Filtros</span> 
-                        </button>
+                        <div class="container-filters">
+                            <button type="button" class="button-filter">
+                                <span class="material-symbols-outlined icon">page_info</span>
+                                <span>Filtros</span> 
+                            </button>
+                        </div>
+                        <div class="filters">
+                        </div>
+                        <div class="container-filters">
+                            <div class="container-export select-none">
+                                <span class="material-symbols-outlined icon button export">more_vert</span>
+                            </div>
+                            <div class="pop-up-export"></div>
+                        </div>
                     </div>
                 </div>
                 <div class="credit-card-statement-items"> 
                     <table class="credit-card-statement-table">
                         <thead>
                             <tr>
-                                <th>Totais</th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th class="credit-card-statement-total">
-                                    <span class="value">R$ 15.000,00</span>
-                                    <div class="container-button-total-menu select-none">
-                                        <span class="material-symbols-outlined icon button credit-card-statement-total-menu">more_vert</span>
-                                    </div>
-                                    <div class="pop-up-button-total-menu"></div>
-                                </th>
+                                <th>Data</th>
+                                <th>Categoria</th>
+                                <th>Descrição</th>
+                                <th>Cartão</th>
+                                <th>Cliente</th>
+                                <th>Valor</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="credit-card-statement-row">
-                                <td class="statement-date">
-                                    <span>01 FEV</span>
-                                </td>
-                                <td class="statement-category">
-                                    <div><span data-category="entretenimento" class="material-symbols-outlined">slideshow</span></div>
-                                </td>
-                                <td class="statement-description">
-                                    <span>Netflix</span>
-                                </td>
-                                <td class="statement-credit-card">
-                                    <span>Nubank</span>
-                                </td>
-                                <td class="statement-customer">
-                                    <span>Meu</span>
-                                </td>
-                                <td class="statement-value">
-                                    <span>R$ 228,41</span>
-                                </td>
-                            </tr>
-                            <tr class="credit-card-statement-row">
-                                <td class="statement-date">
-                                    <span>01 FEV</span>
-                                </td>
-                                <td class="statement-category">
-                                    <div><span data-category="entretenimento" class="material-symbols-outlined">slideshow</span></div>
-                                </td>
-                                <td class="statement-description">
-                                    <span>Netflix</span>
-                                </td>
-                                <td class="statement-credit-card">
-                                    <span>Nubank</span>
-                                </td>
-                                <td class="statement-customer">
-                                    <span>Meu</span>
-                                </td>
-                                <td class="statement-value">
-                                    <span>R$ 228,41</span>
-                                </td>
-                            </tr>
-                            <tr class="credit-card-statement-row">
-                                <td class="statement-date">
-                                    <span>01 FEV</span>
-                                </td>
-                                <td class="statement-category">
-                                    <div><span data-category="entretenimento" class="material-symbols-outlined">slideshow</span></div>
-                                </td>
-                                <td class="statement-description">
-                                    <span>Netflix</span>
-                                </td>
-                                <td class="statement-credit-card">
-                                    <span>Nubank</span>
-                                </td>
-                                <td class="statement-customer">
-                                    <span>Meu</span>
-                                </td>
-                                <td class="statement-value">
-                                    <span>R$ 228,41</span>
-                                </td>
-                            </tr>
-                            <tr class="credit-card-statement-row">
-                                <td class="statement-date">
-                                    <span>01 FEV</span>
-                                </td>
-                                <td class="statement-category">
-                                    <div><span data-category="entretenimento" class="material-symbols-outlined">slideshow</span></div>
-                                </td>
-                                <td class="statement-description">
-                                    <span>Netflix</span>
-                                </td>
-                                <td class="statement-credit-card">
-                                    <span>Nubank</span>
-                                </td>
-                                <td class="statement-customer">
-                                    <span>Meu</span>
-                                </td>
-                                <td class="statement-value">
-                                    <span>R$ 228,41</span>
-                                </td>
-                            </tr>
-                            <tr class="credit-card-statement-row">
-                                <td class="statement-date">
-                                    <span>01 FEV</span>
-                                </td>
-                                <td class="statement-category">
-                                    <div><span data-category="entretenimento" class="material-symbols-outlined">slideshow</span></div>
-                                </td>
-                                <td class="statement-description">
-                                    <span>Netflix</span>
-                                </td>
-                                <td class="statement-credit-card">
-                                    <span>Nubank</span>
-                                </td>
-                                <td class="statement-customer">
-                                    <span>Meu</span>
-                                </td>
-                                <td class="statement-value">
-                                    <span>R$ 228,41</span>
-                                </td>
-                            </tr>
-                            <tr class="credit-card-statement-row">
-                                <td class="statement-date">
-                                    <span>01 FEV</span>
-                                </td>
-                                <td class="statement-category">
-                                    <div><span data-category="entretenimento" class="material-symbols-outlined">slideshow</span></div>
-                                </td>
-                                <td class="statement-description">
-                                    <span>Netflix</span>
-                                </td>
-                                <td class="statement-credit-card">
-                                    <span>Nubank</span>
-                                </td>
-                                <td class="statement-customer">
-                                    <span>Meu</span>
-                                </td>
-                                <td class="statement-value">
-                                    <span>R$ 228,41</span>
-                                </td>
-                            </tr>
-                            <tr class="credit-card-statement-row">
-                                <td class="statement-date">
-                                    <span>01 FEV</span>
-                                </td>
-                                <td class="statement-category">
-                                    <div><span data-category="entretenimento" class="material-symbols-outlined">slideshow</span></div>
-                                </td>
-                                <td class="statement-description">
-                                    <span>Netflix</span>
-                                </td>
-                                <td class="statement-credit-card">
-                                    <span>Nubank</span>
-                                </td>
-                                <td class="statement-customer">
-                                    <span>Meu</span>
-                                </td>
-                                <td class="statement-value">
-                                    <span>R$ 228,41</span>
-                                </td>
-                            </tr>
-                            <tr class="credit-card-statement-row">
-                                <td class="statement-date">
-                                    <span>01 FEV</span>
-                                </td>
-                                <td class="statement-category">
-                                    <div><span data-category="entretenimento" class="material-symbols-outlined">slideshow</span></div>
-                                </td>
-                                <td class="statement-description">
-                                    <span>Netflix</span>
-                                </td>
-                                <td class="statement-credit-card">
-                                    <span>Nubank</span>
-                                </td>
-                                <td class="statement-customer">
-                                    <span>Meu</span>
-                                </td>
-                                <td class="statement-value">
-                                    <span>R$ 228,41</span>
-                                </td>
-                            </tr>
-                            <tr class="credit-card-statement-row">
-                                <td class="statement-date">
-                                    <span>01 FEV</span>
-                                </td>
-                                <td class="statement-category">
-                                    <div><span data-category="entretenimento" class="material-symbols-outlined">slideshow</span></div>
-                                </td>
-                                <td class="statement-description">
-                                    <span>Netflix</span>
-                                </td>
-                                <td class="statement-credit-card">
-                                    <span>Nubank</span>
-                                </td>
-                                <td class="statement-customer">
-                                    <span>Meu</span>
-                                </td>
-                                <td class="statement-value">
-                                    <span>R$ 228,41</span>
-                                </td>
-                            </tr>
-                            <tr class="credit-card-statement-row">
-                                <td class="statement-date">
-                                    <span>01 FEV</span>
-                                </td>
-                                <td class="statement-category">
-                                    <div><span data-category="entretenimento" class="material-symbols-outlined">slideshow</span></div>
-                                </td>
-                                <td class="statement-description">
-                                    <span>Netflix</span>
-                                </td>
-                                <td class="statement-credit-card">
-                                    <span>Nubank</span>
-                                </td>
-                                <td class="statement-customer">
-                                    <span>Meu</span>
-                                </td>
-                                <td class="statement-value">
-                                    <span>R$ 228,41</span>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div> 
