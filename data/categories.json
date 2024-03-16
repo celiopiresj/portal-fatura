@@ -1,0 +1,22 @@
+{
+    "Alimentos": {
+        "icon": "food_bank",
+        "color": "#FF5733"
+    },
+    "Eletrônicos": {
+        "icon": "devices",
+        "color": "#3498DB"
+    },
+    "Vestuário": {
+        "icon": "apparel",
+        "color": "#9B59B6"
+    },
+    "Livros": {
+        "icon": "book",
+        "color": "#2ECC71"
+    },
+    "Decoração": {
+        "icon": "house",
+        "color": "#F1C40F"
+    }
+}
