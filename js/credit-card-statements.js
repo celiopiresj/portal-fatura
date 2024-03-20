@@ -389,7 +389,8 @@ async function addData(){
         document.head.appendChild(styleTag);
         
         const cardsValues = {}
-
+        current_table.querySelector("tbody").innerHTML = ""
+        
         dataItemnsCurrent.forEach(rowCurrent => {
             cardsValues[rowCurrent.card] = rowCurrent.amount + (cardsValues[rowCurrent.card] ? cardsValues[rowCurrent.card] : 0);
             const rowTable = document.createElement("tr")
@@ -422,7 +423,8 @@ async function addData(){
             rowTable.addEventListener("click", ()=> {
                 console.log(rowData)
             })
-            current_table.appendChild(rowTable)
+            
+            current_table.querySelector("tbody").appendChild(rowTable)
         });
 
     } catch (error) {
