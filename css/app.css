@@ -77,6 +77,8 @@
 
 .app:has(.sidebar--open) .header{
     left: 28rem;
+    width: calc(100% - 28rem);
+    
 }
 
 .header {
@@ -89,7 +91,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: calc(100% - 8rem);
     height: 8rem;
 }
 
@@ -98,6 +100,7 @@
 }
 
 .header__container {
+    padding: 0 2rem 0 2rem;
     max-width: 1280px;
     display: flex;
     align-items: center;
@@ -213,7 +216,7 @@
     gap: .8rem;
 }
 
-.md-fba *:not(.md-fba__icon) {
+.md-fba *:not(.md-fba-icon) {
     display: none;
 }
 
@@ -224,11 +227,11 @@
     width: auto;
 }
 
-.md-fba-extended  *:not(.md-fba__icon) {
+.md-fba-extended  *:not(.md-fba-icon) {
     display: block;
 }
 
-.md-fba__icon {
+.md-fba-icon {
     margin-left: 1.6rem;
     font-size: 2.4rem;
     font-variation-settings:
@@ -238,7 +241,7 @@
     'opsz' 48
 }
 
-.md-fba__text {
+.md-fba-text {
     font-size: var(--font_medium);
     font-weight: 600;
     margin-right: 1.6rem;

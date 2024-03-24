@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="./css/app.css">
-    <link rel="stylesheet" href="./css/credit-card-statements.css">
+    <link rel="stylesheet" href="./css/credit-card-bills.css">
 
     <script src="./js/moment-with-locales.js" defer></script>
+    <script src="./js/dinero.min.js" defer></script>
     <script src="./js/menu.js" defer></script>
-    <script src="./js/credit-card-statements.js" defer></script>
+    <script src="./js/credit-card-bills.js" defer></script>
 </head>
 <body>
     <div class="app">
@@ -31,42 +32,42 @@
                 </button>
             </div>
             <button type="button" class="button md-fba sidebar__button_register" aria-label="Novo Registro">
-                <span class="material-symbols-outlined md-fba__icon">add</span>
-                <span class="md-fba__text">Novo Registro</span>
+                <span class="material-symbols-outlined md-fba-icon">add</span>
+                <span class="md-fba-text">Novo Registro</span>
             </button>
             <ul class="sidebar__list">
                 <li class="sidebar__item"></li>
             </ul>
         </aside>
         <main class="content">
-            <div class="credit-card-statements">
-                <div class="credit-card-statements__container-info">
-                    <div class="credit-card-statements__months-buttons">
+            <div class="credit-card-bills">
+                <div class="credit-card-bills__container-info">
+                    <div class="credit-card-bills__months-buttons">
                         <button type="button" class="button button--previous">
-                            <span class="button__text">DEZ 23</span>
+                            <span class="button-text">DEZ 23</span>
                             <span class="material-symbols-outlined icon icon--arrow">chevron_left</span>
                         </button>
                         <span class="current-month">
-                            <span class="current-month__text">JAN</span>
-                            <span class="current-month__status">Fatura atual</span>
+                            <span class="current-month-text">JAN</span>
+                            <span class="current-month-status">Fatura atual</span>
                         </span>   
                         <button type="button" class="button button--next">
                             <span type="button" class="material-symbols-outlined container-icon icon icon--arrow">chevron_right</span>
-                            <span class="button__text">FEV</span>
+                            <span class="button-text">FEV</span>
                         </button>
                     </div>
-                    <div class="credit-card-statements__cards">
+                    <div class="credit-card-bills__cards">
                     </div>
-                    <div class="credit-card-statements-options">
-                        <div class="credit-card-statements__filters">
+                    <div class="credit-card-bills-options">
+                        <div class="credit-card-bills__filters">
                             <button type="button" class="button button-filter">
-                                <span class="material-symbols-outlined icon button-filter__icon">page_info</span>
-                                <span class="button-filter__text">Filtros</span> 
+                                <span class="material-symbols-outlined icon button-filter-icon">page_info</span>
+                                <span class="button-filter-text">Filtros</span> 
                             </button>
-                            <div class="credit-card-statements__filters__content">
+                            <div class="credit-card-bills__filters__content">
                             </div>
                         </div>
-                        <div class="credit-card-statements__export-content">
+                        <div class="credit-card-bills__export-content">
                             <button type="button" class="export-content__button container-icon container-icon--hover">
                                 <span class="material-symbols-outlined icon ">more_vert</span>
                             </button>
@@ -74,7 +75,7 @@
                         </div>
                     </div>
                 </div>
-                 <table class="credit-card-statements__content">
+                 <table class="credit-card-bills__content">
                         <thead>
                             <tr>
                                 <th>Data</th>
