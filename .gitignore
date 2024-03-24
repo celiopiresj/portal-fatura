@@ -1,0 +1,6 @@
+/node_modules
+/.env
+/data/bills.json
+/data/credit_cards.json
+/data/customers.json
+/data/cards_transactions.json

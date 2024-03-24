@@ -1,22 +1,142 @@
-{
-    "Alimentos": {
-        "icon": "food_bank",
-        "color": "#FF5733"
-    },
-    "Eletrônicos": {
-        "icon": "devices",
-        "color": "#3498DB"
-    },
-    "Vestuário": {
-        "icon": "apparel",
-        "color": "#9B59B6"
-    },
-    "Livros": {
-        "icon": "book",
-        "color": "#2ECC71"
-    },
-    "Decoração": {
-        "icon": "house",
-        "color": "#F1C40F"
-    }
-}
+[
+  {
+    "name": "Alimentos",
+    "icon": "food_bank",
+    "color": "#FF5733",
+    "status": 1,
+    "id": "cbb94ea6-bea7-4aba-88aa-20f90c394709"
+  },
+  {
+    "name": "Eletrônicos",
+    "icon": "devices",
+    "color": "#3498DB",
+    "status": 1,
+    "id": "7bf15999-0adf-4f27-aeb1-5c6cfb346f8f"
+  },
+  {
+    "name": "Vestuário",
+    "icon": "apparel",
+    "color": "#9B59B6",
+    "status": 1,
+    "id": "50ef6446-8530-4bb5-8db4-ce5de17d9efb"
+  },
+  {
+    "name": "Decoração",
+    "icon": "house",
+    "color": "#F1C40F",
+    "status": 1,
+    "id": "a5e8adf6-e316-47cf-a810-9a8eec589d58"
+  },
+  {
+    "name": "Saúde",
+    "icon": "medical_services",
+    "color": "#1ABC9C",
+    "status": 1,
+    "id": "6f08f5df-1968-4b7b-b0e4-df4dbbd1687b"
+  },
+  {
+    "name": "Educação",
+    "icon": "school",
+    "color": "#9B59B6",
+    "status": 1,
+    "id": "f25fca43-cc6a-4c15-b199-30d2cc8dfb69"
+  },
+  {
+    "name": "Entretenimento",
+    "icon": "sports_esports",
+    "color": "#3498DB",
+    "status": 1,
+    "id": "22bdef7b-0c64-4d38-b0b3-b76d365d6ef5"
+  },
+  {
+    "name": "Viagem",
+    "icon": "flight",
+    "color": "#F1C40F",
+    "status": 1,
+    "id": "acda02a7-3d9b-4aa2-8926-35f6ec0d89c9"
+  },
+  {
+    "name": "Casa",
+    "icon": "house_siding",
+    "color": "#2C3E50",
+    "status": 1,
+    "id": "f9a47de2-3ab9-4d62-8908-5b1c6e97864d"
+  },
+  {
+    "name": "Família",
+    "icon": "family_restroom",
+    "color": "#E67E22",
+    "status": 1,
+    "id": "ce055b15-6a94-4c1a-9d6b-bdb1c42625b3"
+  },
+  {
+    "name": "Animais de Estimação",
+    "icon": "pets",
+    "color": "#3498DB",
+    "status": 1,
+    "id": "c662e298-fb45-49c1-95d2-c5d74e89df92"
+  },
+  {
+    "name": "Tecnologia",
+    "icon": "memory",
+    "color": "#1ABC9C",
+    "status": 1,
+    "id": "f33a56b1-7b98-4324-bf30-3b30c83fd199"
+  },
+  {
+    "name": "Beleza",
+    "icon": "spa",
+    "color": "#D35400",
+    "status": 1,
+    "id": "e1e41c6b-62ff-4769-b56c-61974a7dd463"
+  },
+  {
+    "name": "Esportes",
+    "icon": "sports_soccer",
+    "color": "#27AE60",
+    "status": 1,
+    "id": "c35a7b83-2f4d-48aa-b10a-ffbb8a181747"
+  },
+  {
+    "name": "Investimentos",
+    "icon": "trending_up",
+    "color": "#8E44AD",
+    "status": 1,
+    "id": "d92a3bfa-3c0d-47fb-88cf-98c6dd23f43e"
+  },
+  {
+    "name": "Trabalho",
+    "icon": "work",
+    "color": "#27AE60",
+    "status": 1,
+    "id": "f617362d-26d9-4d65-9e4c-d4bb7e15c106"
+  },
+  {
+    "name": "Hobbies",
+    "icon": "videogame_asset",
+    "color": "#3498DB",
+    "status": 1,
+    "id": "ff8d10c4-e2ff-4ec0-8357-f156ff882e1b"
+  },
+  {
+    "name": "Finanças",
+    "icon": "attach_money",
+    "color": "#F1C40F",
+    "status": 1,
+    "id": "cd99628a-58a1-486f-bd89-cf2e1774e99e"
+  },
+  {
+    "name": "Assinatura",
+    "icon": "receipt_long",
+    "color": "#FF5733",
+    "status": 1,
+    "id": "27e0b52c-541e-49c3-bd13-4a03140a37a2"
+  },
+  {
+    "name": "Passagem",
+    "icon": "flight",
+    "color": "#F1C40F",
+    "status": 1,
+    "id": "9e0bcdba-bfa9-4c3d-88aa-7d7788f481b1"
+  }
+]

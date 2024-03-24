@@ -1,0 +1,33 @@
+{
+  "name": "accountgroup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/celiopiresj/portal-fatura.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/celiopiresj/portal-fatura/issues"
+  },
+  "homepage": "https://github.com/celiopiresj/portal-fatura#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "decimal.js": "^10.4.3",
+    "dinero": "^1.0.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.1",
+    "moment": "^2.30.1",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
