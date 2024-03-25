@@ -147,7 +147,7 @@ async function generateBills() {
     });
 }
 
-app.get('/api/bills/init', async (req, res) => {
+app.post('/api/bills/generate', async (req, res) => {
     try {
         const result = await generateBills();
         res.status(200).json({ result: result });
@@ -158,7 +158,11 @@ app.get('/api/bills/init', async (req, res) => {
 
 // Rota para buscar todas as faturas
 app.get('/api/bills', (req, res) => {
-    res.json({billsData});
+    const billsFiltered = billsData.flatMap(bill => {
+        const { items, ...details} = bill
+        return details
+    })
+    res.json(billsFiltered);
 });
 
 // Rota para buscar todas as faturas

@@ -4,6 +4,41 @@ let dataItems = [];
 let dataCategories = [];
 let dataCards = [];
 let dataItemnsCurrent = [];
+let dataBills = []
+
+const pop_up = document.querySelector(".pop-up")
+
+function windowPopUp(textWindow) {
+    const window = document.createElement("div");
+    const title_bar = document.createElement("div");
+    const title_bar_text = document.createElement("div");
+    const action_title_bar = document.createElement("div");
+    const iconX = document.createElement("span")
+    
+    iconX.textContent = "close"
+    iconX.classList.add("material-symbols-outlined")
+    iconX.classList.add("icon")
+    window.classList.add("pop-up__window");
+    title_bar.classList.add("pop-up__title-bar");
+    title_bar_text.classList.add("pop-up__title-bar__text");
+    action_title_bar.classList.add("pop-up__title-bar__button");
+    action_title_bar.classList.add("button");
+    action_title_bar.classList.add("close-window");
+    title_bar_text.textContent = textWindow
+    action_title_bar.appendChild(iconX)
+    title_bar.appendChild(title_bar_text);
+    title_bar.appendChild(action_title_bar);
+    window.appendChild(title_bar);
+
+    return window;
+}
+
+pop_up.addEventListener("click", function(e){
+    if (e.target === this || e.target.parentNode.classList.contains("close-window") ) {
+        this.innerHTML = ""
+        this.classList.remove("active")
+    }
+})
 
 const months_buttons = document.querySelector(".credit-card-bills__months-buttons")
 const previous_month_button = months_buttons.querySelector(".button--previous")
@@ -19,6 +54,11 @@ const months = {};
 
 async function fetchData() {
     try {
+
+        // Buscar dados das faturas
+        const bills = await fetch('http://localhost:3000/api/bills')
+        dataBills = await bills.json();
+
         // Buscar dados das transações de cartões
         const cardsTransactionsResponse = await fetch('http://localhost:3000/api/bills/items');
         dataItems = await cardsTransactionsResponse.json();
@@ -30,6 +70,18 @@ async function fetchData() {
         // Buscar dados dos cartões
         const cardsResponse = await fetch('http://localhost:3000/api/cards');
         dataCards = await cardsResponse.json();
+
+        let firtsDate;
+        let lastDate;
+
+        dataBills.forEach(bill => {
+            if (!firtsDate || moment(bill.due_date).isBefore(firtsDate)) {
+                firtsDate = moment(bill.due_date);
+            }
+            if (!lastDate || moment(bill.due_date).isAfter(lastDate)) {
+                lastDate = moment(bill.due_date);
+            }
+        });
 
           // Preenchendo o objeto 'months' com os meses dos últimos 6 meses, incluindo o atual
         for (let index = 11; index > 0; index--) {
@@ -146,6 +198,8 @@ async function addData() {
             cardsData.forEach(cardInfo => {
 
                 const current_bill = months[monthsKeys[currentMonthIndex]]
+
+                32
             
                 // Calcula a data de vencimento do cartão
                 const due_day = moment(`${cardInfo.due_day}/${moment(current_bill).format("MM/YYYY")}`, "DD/MM/YYYY").format("DD MMM");
@@ -174,12 +228,6 @@ async function addData() {
                 credit_card_bills_cards.innerHTML += card;
         });
 }
-
-
-function months_available(){
-    
-}
-
 
 fetchData().then(() => {
     // filteredData()
@@ -226,317 +274,135 @@ fetchData().then(() => {
         else {
             current_month_label.querySelector(".current-month-status").textContent = "Próxima fatura";
         }
-        addData(); // Chamada para atualizar os dados da tabela
+        addData();
     })
 });
 
-// const popUp = document.querySelector(".pop-up")
+const export_content = document.querySelector(".credit-card-bills__export-content");
+const buttonExport = export_content.querySelector(".export-content__button");
+const popUpExport = export_content.querySelector(".export-content__pop-up");
 
-// function pagePopUp(textPage) {
-//     const page = document.createElement("div");
-//     const pageMenu = document.createElement("div");
-//     const textMenu = document.createElement("div");
-//     const actionMenu = document.createElement("div");
-//     const iconX = document.createElement("span")
+buttonExport.addEventListener("click", () => {
+
+    if (popUpExport.classList.contains("active")) {
+        popUpExport.innerHTML = "";
+        popUpExport.classList.remove("active");
+    } else {
+        popUpExport.classList.add("active");
+        popUpExport.innerHTML = `
+        <button type="button">Exportar XLS</button>
+        <button type="button">Encaminhar via WhatsApp</button>`
+    }; 
+})
+
+const card_bills_filters = document.querySelector(".credit-card-bills__filters");
+const button_filter = card_bills_filters.querySelector(".button-filter");
+const filters_content = card_bills_filters.querySelector(".filters__content");
+
+button_filter.addEventListener("click", () => {
+    pop_up.classList.add("active")
+    const window = windowPopUp("Filtros")
+    const filter_window = document.createElement("div")
+    filter_window.classList.add("credit-card-bills__filter-window")
+
+    const filter_dates = document.createElement("div");
+    filter_dates.classList.add("filter-window_section");
+
+    const filter_categories = document.createElement("div");
+    filter_categories.classList.add("filter-window_section");
+
+    const filter_descriptions = document.createElement("div");
+    filter_descriptions.classList.add("filter-window_section");
+
+    const filter_cards = document.createElement("div");
+    filter_cards.classList.add("filter-window_section");
+
+    const filter_customers = document.createElement("div");
+    filter_customers.classList.add("filter-window_section");
+
+    const filter_values = document.createElement("div");
+    filter_values.classList.add("filter-window_section");
     
-//     iconX.textContent = "close"
-//     iconX.classList.add("material-symbols-outlined")
-//     page.classList.add("pop-up-page");
-//     pageMenu.classList.add("pop-up-page-menu");
-//     textMenu.classList.add("text");
-//     actionMenu.classList.add("action");
-//     actionMenu.classList.add("button");
-//     textMenu.textContent = textPage
-//     actionMenu.appendChild(iconX)
-//     pageMenu.appendChild(textMenu);
-//     pageMenu.appendChild(actionMenu);
-//     page.appendChild(pageMenu);
+    filter_dates.innerHTML = '<div class="section__title"><span class="section__title-text">Data</span></div>'
+    filter_categories.innerHTML = '<div class="section__title"><span class="section__title-text">Categoria</span></div>'
+    filter_descriptions.innerHTML = '<div class="section__title"><span class="section__title-text">Descrição</span></div>'
+    filter_cards.innerHTML = '<div class="section__title"><span class="section__title-text">Cartão</span></div>'
+    filter_customers.innerHTML = '<div class="section__title"><span class="section__title-text">Clientes</span></div>'
+    filter_values.innerHTML = '<div class="section__title"><span class="section__title-text">Valores</span></div>'
+    
+    const uniqueDates = new Set();
+    const uniqueCategories = new Set();
+    const uniqueDescriptions = new Set();
+    const uniqueCards = new Set();
+    const uniqueCustomers = new Set();
+    const uniqueValues = new Set();
+    
+    for (const rowData of dataItemnsCurrent) {
+        uniqueDates.add(rowData.date);
+        uniqueCategories.add(rowData.category);
+        uniqueDescriptions.add(rowData.description);
+        uniqueCards.add(rowData.card_name);
+        uniqueCustomers.add(rowData.customer);
+        uniqueValues.add(rowData.amount);
+    }
+    
+    const content_dates = Array.from(uniqueDates, date => `<button type="button" class="button filter-button" data-value=${date}>${moment(date).format("DD/MM/YYYY")}</button>`).join('');
+    const content_categories = Array.from(uniqueCategories, category => `<button type="button" class="button filter-button" data-value="${category}">${category}</button>`).join('');
+    const content_descriptions = Array.from(uniqueDescriptions, description => `<button type="button" class="button filter-button" data-value="${description}">${description}</button>`).join('');
+    const content_cards = Array.from(uniqueCards, card => `<button type="button" class="button filter-button" data-value="${card}">${card}</button>`).join('');
+    const content_customers = Array.from(uniqueCustomers, customer => `<button type="button" class="button filter-button" data-value="${customer}">${customer}</button>`).join('');
+    const content_values = Array.from(uniqueValues, value => `<button type="button" class="button filter-button" data-value="${value}">${(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</button>`).join('');
 
-//     return page;
-// }
+    filter_dates.innerHTML += `<div class="section__button">${content_dates}</div>`;
+    filter_window.appendChild(filter_dates);
+    
+    filter_categories.innerHTML += `<div class="section__button">${content_categories}</div>`;
+    filter_window.appendChild(filter_categories);
+    
+    filter_descriptions.innerHTML += `<div class="section__button">${content_descriptions}</div>`;
+    filter_window.appendChild(filter_descriptions);
+    
+    filter_cards.innerHTML += `<div class="section__button">${content_cards}</div>`;
+    filter_window.appendChild(filter_cards);
+    
+    filter_customers.innerHTML += `<div class="section__button">${content_customers}</div>`;
+    filter_window.appendChild(filter_customers);
+    
+    filter_values.innerHTML += `<div class="section__button">${content_values}</div>`;
+    filter_window.appendChild(filter_values);
 
-// popUp.addEventListener("click", function(e){
-//     if (e.target === this || e.target.parentNode.classList.contains("action") ) {
-//         this.innerHTML = ""
-//         this.classList.remove("active")
-//     }
-// })
+    const buttonFilters = filter_window.querySelectorAll('span[data-value]')
 
-// async function addData() {
-//     try {
-//         const data = dataItems;
-//         const categoriesData = dataCategories;
-//         const cardsData =  dataCards;
-        
-//         const clasColor = Object.values(categoriesData).map(category => {
-//             return `.icon-color-${category.icon} { 
-//                 background-color: ${category.color}; 
-//             }`; 
-//         });
-
-//         // const filteredData = data.filter(item => {
-//         //     const allowedCustomers = ["José Silva", "Gustavo Martins", "Aline", "Alexandre", "Marilene"];
-//         //     return allowedCustomers.includes(item.customer);
-//         // });
-
-//         const styleTag = document.createElement('style');
-//         styleTag.textContent = clasColor.join(" ")
-//         document.head.appendChild(styleTag);
-
-//         const table = document.querySelector(".credit-card-bill-table tbody")
-//         table.innerHTML = ""
-//         const systemCurrentDate = months[monthsKeys[currentMonthIndex]]
-//         const cardsValues = {}
-
-//         dataItemnsCurrent = []
-
-//         data.forEach(rowData => {
-//             if(moment(currentDate).format("MM") === moment(rowData.date).format("MM")){
-//                 if (cardsData.hasOwnProperty(rowData.card)) {
-//                     dataItemnsCurrent.push(rowData)
-//                     cardsValues[rowData.card] = rowData.amount + (cardsValues[rowData.card] ? cardsValues[rowData.card] : 0);
-//                     const rowTable = document.createElement("tr")
-//                     rowTable.classList.add("credit-card-bill-row")
-//                     const amount = (rowData.amount).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-//                     rowTable.innerHTML = `
-//                         <td class="bill-date">
-//                             <span>${moment(rowData.date).format('DD MMM').toUpperCase()}</span>
-//                         </td>
-//                         <td class="bill-category">
-//                             <div class="container-category">
-//                                 <div class="container-icon icon-color-${categoriesData[rowData["category"]]["icon"]}"><span class="material-symbols-outlined">${categoriesData[rowData["category"]]["icon"]}</span></div>
-//                                 <span>${rowData.category}</span>
-//                             </div>
-//                         </td>
-//                         <td class="bill-description">
-//                             <span>${rowData.description}</span>
-//                         </td>
-//                         <td class="bill-credit-card">
-//                             <span>${rowData.card}</span>
-//                         </td>
-//                         <td class="bill-customer">
-//                             <span>${rowData.customer}</span>
-//                         </td>
-//                         <td class="bill-value">
-//                             <span>${amount}</span>
-//                         </td>
-//                     `
-
-//                     rowTable.addEventListener("click", ()=> {
-//                         console.log(rowData)
-//                     })
-//                     table.appendChild(rowTable)
-//                 }
-//             }
-//         })
-
-//         const creditCardbill = document.querySelector(".credit-card-bills")
-//         creditCardbill.innerHTML = ""
-//         Object.entries(cardsData).forEach(cardInfo => {
-//              const due_date = moment(`${cardInfo.due_date}/${moment(currentDate).format("MM/YYYY")}`, "DD/MM/YYYY").format("DD MMM"); 
-//             let close_day = ''
-//             const today = moment();
+    buttonFilters.forEach(buttonFilter => {
+        buttonFilter.addEventListener("click", function(e) {
+            const filter = e.target.getAttribute('data-value')
             
-//             if(cardInfo[1].closing_date < cardInfo[1].due_date) {
-//                 closing_date = moment(`${cardInfo[1].closing_date}/${moment(currentDate).format("MM/YYYY")}`, "DD/MM/YYYY");
-//             } else{
-//                 closing_date = moment(`${cardInfo[1].closing_date}/${moment(currentDate).subtract(1, 'months').format("MM/YYYY")}`, "DD/MM/YYYY");
-//             }
-          
-//             const card = `
-//             <div class="credit-card-bill">
-//                 <span class="bill-name">
-//                     <span>${cardInfo[0]}</span>
-//                 </span>
-//                 <span class="bill-value">${(cardsValues[cardInfo[0]]).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
-//                 <span class="bill-status">${ today.isSameOrAfter(closing_date)? "Fechada" : `Fechamento em <strong>${closing_date.format("DD MMM").toUpperCase()}</strong>`}</span>
-//                 <span class="bill-due-date">Vencimento em <strong>${due_date.toUpperCase()}</strong></span>
-//                 <span class="bill-customer"></span>
-//             </div>`
-
-//             creditCardbill.innerHTML +=card;
-//         })
-
-//     } catch (error) {
-//         console.error('Erro ao carregar os dados:', error);
-//     }
-// }
-
-// const creditCardSMenuMonths = document.querySelector(".credit-card-bills-menu");
-// const buttonsPrevious = creditCardSMenuMonths.querySelectorAll(".previous");
-// const buttonsNext = creditCardSMenuMonths.querySelectorAll(".next");
-// const currentMonth = creditCardSMenuMonths.querySelector(".current-month");
-// const currentInfo = creditCardSMenuMonths.querySelector(".current-info");
-
-
-// const buttonNextText = Array.from(buttonsNext).filter(btnNext => btnNext.classList.contains("menu-item"))[0];
-// const buttonPreviousText = Array.from(buttonsPrevious).filter(btnPrevious => btnPrevious.classList.contains("menu-item"))[0];
-
-// buttonsPrevious.forEach(button => {
-//     if (button.classList.contains("menu-item")) {
-//         button.textContent = monthsKeys[4];
-//     }
-   
-//     button.addEventListener("click", () => {
-//         currentMonthIndex = (currentMonthIndex - 1) % monthsKeys.length;
-//         currentMonth.textContent = monthsKeys[currentMonthIndex];
-//         buttonPreviousText.textContent = monthsKeys[currentMonthIndex - 1] ;
-//         buttonNextText.textContent = monthsKeys[currentMonthIndex + 1];
-//         if (currentMonthIndex == 5) {
-//             currentInfo.textContent = "Fatura atual";
-//         } else if (currentMonthIndex < 5) {
-//             currentInfo.textContent = "Fatura anterior";
-//         }
-//         else {
-//             currentInfo.textContent = "Próxima fatura";
-//         }
-//         addData()
-//     });
-// });
-
-// buttonsNext.forEach(button => {
-//     if (button.classList.contains("menu-item")) {
-//         button.textContent = monthsKeys[6];
-//     }
-
-//     button.addEventListener("click", () => {
-//         currentMonthIndex = (currentMonthIndex + 1 + monthsKeys.length) % monthsKeys.length;
-//         currentMonth.textContent = monthsKeys[currentMonthIndex];
-//         buttonNextText.textContent = monthsKeys[currentMonthIndex + 1];
-//         buttonPreviousText.textContent = monthsKeys[currentMonthIndex - 1];
-//         if (currentMonthIndex == 5) {
-//             currentInfo.textContent = "Fatura atual";
-//         } else if (currentMonthIndex < 5) {
-//             currentInfo.textContent = "Fatura anterior";
-//         }
-//         else {
-//             currentInfo.textContent = "Próxima fatura";
-//         }
-//         addData()
-//     });
-// });
-
-
-// const body = document.querySelector('body');
-// const styleBody = window.getComputedStyle(body);
-// const fontSize = styleBody.fontSize.match(/\d+(\.\d+)?/)[0];
-
-// const creditCardFilters = document.querySelector(".credit-card-bills-filters");
-// const buttonExport = creditCardFilters.querySelector(".container-export .export");
-// const popUpExport = creditCardFilters.querySelector(".pop-up-export");
-
-// buttonExport.addEventListener("click", () => {
-
-//     const widthcontainerEport = (creditCardFilters.querySelector(".container-export").offsetWidth / fontSize ) / 2;
-
-//     if (popUpExport.classList.contains("active")) {
-//         popUpExport.innerHTML = "-";
-//         popUpExport.classList.remove("active");
-//     } else {
-//         popUpExport.classList.add("active");
-//         popUpExport.innerHTML = `
-//         <button type="button">Exportar XLS</button>
-//         <button type="button">Encaminhar via WhatsApp</button>`
-//         const widthPopUp = (popUpExport.offsetWidth) / fontSize ;
-//         popUpExport.style.transform = `translate(-${widthPopUp + widthcontainerEport}rem, 2rem)`;
-//     }; 
-// })
-
-// const buttonFilter = creditCardFilters.querySelector(".button-filter");
-
-// buttonFilter.addEventListener("click", () => {
-//     popUp.classList.add("active")
-//     const page = pagePopUp("Filtros")
-//     const pageFilters = document.createElement("div")
-//     pageFilters.classList.add("credit-card-bills-filters-page")
-
-//     const pageDates = document.createElement("div")
-//     const pageCategories = document.createElement("div")
-//     const pageDescriptions = document.createElement("div")
-//     const pageCards = document.createElement("div")
-//     const pagecustomers = document.createElement("div")
-//     const pageValues = document.createElement("div")
-    
-//     pageDates.innerHTML = '<div class="container-title"><span>Data</span></div>'
-//     pageCategories.innerHTML = '<div class="container-title"><span>Categoria</span></div>'
-//     pageDescriptions.innerHTML = '<div class="container-title"><span>Descrição</span></div>'
-//     pageCards.innerHTML = '<div class="container-title"><span>Cartão</span></div>'
-//     pagecustomers.innerHTML = '<div class="container-title"><span>Clientes</span></div>'
-//     pageValues.innerHTML = '<div class="container-title"><span>Valores</span></div>'
-    
-//     const uniqueDates = new Set();
-//     const uniqueCategories = new Set();
-//     const uniqueDescriptions = new Set();
-//     const uniqueCards = new Set();
-//     const uniqueCustomers = new Set();
-//     const uniqueValues = new Set();
-    
-//     for (const rowData of dataItemnsCurrent) {
-//         uniqueDates.add(rowData.date);
-//         uniqueCategories.add(rowData.category);
-//         uniqueDescriptions.add(rowData.description);
-//         uniqueCards.add(rowData.card);
-//         uniqueCustomers.add(rowData.customer);
-//         uniqueValues.add(rowData.amount);
-//     }
-    
-//     const contentDates = Array.from(uniqueDates, date => `<span class="select-none date" data-value=${date}>${moment(date).format("DD/MM/YYYY")}</span>`).join('');
-//     const contentCategories = Array.from(uniqueCategories, category => `<span class="select-none category" data-value="${category}">${category}</span>`).join('');
-//     const contentDescriptions = Array.from(uniqueDescriptions, description => `<span class="select-none description" data-value="${description}">${description}</span>`).join('');
-//     const contentCards = Array.from(uniqueCards, card => `<span class="select-none card" data-value="${card}">${card}</span>`).join('');
-//     const contentCustomers = Array.from(uniqueCustomers, customer => `<span class="select-none custumer" data-value="${customer}">${customer}</span>`).join('');
-//     const contentValues = Array.from(uniqueValues, value => `<span class="select-none value" data-value="${value}">${(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>`).join('');
-
-//     pageDates.innerHTML += `<div class="container-items-filters">${contentDates}</div>`;
-//     pageFilters.appendChild(pageDates);
-    
-//     pageCategories.innerHTML += `<div class="container-items-filters">${contentCategories}</div>`;
-//     pageFilters.appendChild(pageCategories);
-    
-//     pageDescriptions.innerHTML += `<div class="container-items-filters">${contentDescriptions}</div>`;
-//     pageFilters.appendChild(pageDescriptions);
-    
-//     pageCards.innerHTML += `<div class="container-items-filters">${contentCards}</div>`;
-//     pageFilters.appendChild(pageCards);
-    
-//     pagecustomers.innerHTML += `<div class="container-items-filters">${contentCustomers}</div>`;
-//     pageFilters.appendChild(pagecustomers);
-    
-//     pageValues.innerHTML += `<div class="container-items-filters">${contentValues}</div>`;
-//     pageFilters.appendChild(pageValues);
-
-//     const buttonFilters = pageFilters.querySelectorAll('span[data-value]')
-
-//     buttonFilters.forEach(buttonFilter => {
-//         buttonFilter.addEventListener("click", function(e) {
-//             const filter = e.target.getAttribute('data-value')
-            
-//             if (e.target.classList.contains("active")) {
-//                 e.target.classList.remove("active")
-//             }
-//             else {
-//                 e.target.classList.add("active")
-//             }
-//         }) 
+            if (e.target.classList.contains("active")) {
+                e.target.classList.remove("active")
+            }
+            else {
+                e.target.classList.add("active")
+            }
+        }) 
        
-//     })
+    })
 
-//     let div = document.createElement("div")
-//     div.classList.add("container-button-filter")
-//     div.innerHTML =`<button type="button" class="apply select-none">Aplicar</button>
-//     <button type="button" class="cancel select-none">Cancelar</button>`
+    let action_buttons = document.createElement("div")
+    action_buttons.classList.add("filter_window__action-buttons")
+    action_buttons.innerHTML =`<button type="button" class="button save">Salvar</button>
+    <button type="button" class="button cancel">Cancelar</button>`
 
-//     page.appendChild(pageFilters)
-//     page.appendChild(div)
-//     popUp.appendChild(page)
-// })
+    window.appendChild(filter_window)
+    window.appendChild(action_buttons)
+    pop_up.appendChild(window)
+})
 
-// function filteredData(vaueFilter,column){
-//     const items = document.querySelector(".credit-card-bill-table tbody")
-//     const buttonFilters = pageFilters.querySelectorAll('span[data-value]')
+function filteredData(vaueFilter,column){
+    const items = document.querySelector(".credit-card-bill-table tbody")
+    const buttonFilters = filter_window.querySelectorAll('span[data-value]')
 
-//     console.log(items)
-//     // items.forEach(item => {
-//     //     console.log(console.log(item))
-//     // })
-// }
+    console.log(items)
+    // items.forEach(item => {
+    //     console.log(console.log(item))
+    // })
+}
