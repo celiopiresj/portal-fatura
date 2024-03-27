@@ -351,7 +351,7 @@ button_filter.addEventListener("click", () => {
     const content_descriptions = Array.from(uniqueDescriptions, description => `<button type="button" class="button filter-button" data-value="${description}">${description}</button>`).join('');
     const content_cards = Array.from(uniqueCards, card => `<button type="button" class="button filter-button" data-value="${card}">${card}</button>`).join('');
     const content_customers = Array.from(uniqueCustomers, customer => `<button type="button" class="button filter-button" data-value="${customer}">${customer}</button>`).join('');
-    const content_values = Array.from(uniqueValues, value => `<button type="button" class="button filter-button" data-value="${value}">${(value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</button>`).join('');
+    const content_values = Array.from(uniqueValues, value => `<button type="button" class="button filter-button" data-value="${value}">${(value/100).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</button>`).join('');
 
     filter_dates.innerHTML += `<div class="section__button">${content_dates}</div>`;
     filter_window.appendChild(filter_dates);
@@ -362,16 +362,16 @@ button_filter.addEventListener("click", () => {
     filter_descriptions.innerHTML += `<div class="section__button">${content_descriptions}</div>`;
     filter_window.appendChild(filter_descriptions);
     
-    filter_cards.innerHTML += `<div class="section__button">${content_cards}</div>`;
+    filter_cards.innerHTML += `<div class="section__button">${content_cards.replace(/\b\w/g, char => char.toUpperCase())}</div>`;
     filter_window.appendChild(filter_cards);
     
-    filter_customers.innerHTML += `<div class="section__button">${content_customers}</div>`;
+    filter_customers.innerHTML += `<div class="section__button">${content_customers.replace(/\b\w/g, char => char.toUpperCase())}</div>`;
     filter_window.appendChild(filter_customers);
     
     filter_values.innerHTML += `<div class="section__button">${content_values}</div>`;
     filter_window.appendChild(filter_values);
 
-    const buttonFilters = filter_window.querySelectorAll('span[data-value]')
+    const buttonFilters = filter_window.querySelectorAll('button[data-value]')
 
     buttonFilters.forEach(buttonFilter => {
         buttonFilter.addEventListener("click", function(e) {
@@ -390,7 +390,7 @@ button_filter.addEventListener("click", () => {
     let action_buttons = document.createElement("div")
     action_buttons.classList.add("filter_window__action-buttons")
     action_buttons.innerHTML =`<button type="button" class="button save">Salvar</button>
-    <button type="button" class="button cancel">Cancelar</button>`
+    <button type="button" class="button cancel">Limpar filtros</button>`
 
     window.appendChild(filter_window)
     window.appendChild(action_buttons)
@@ -406,3 +406,118 @@ function filteredData(vaueFilter,column){
     //     console.log(console.log(item))
     // })
 }
+
+const button_register = document.querySelector(".sidebar__button-register")
+
+button_register.addEventListener("click", function(e) {
+    const container_button_register = document.querySelector(".sidebar__container-button-register");
+    let pop_up_register = document.querySelector(".pop-up-register");
+    const sidebar = document.querySelector(".sidebar");
+
+    // Função para remover o pop-up
+    function removePopUp() {
+        pop_up_register.remove();
+        pop_up.classList.remove("pop-up__pop-up-register");
+        pop_up.removeEventListener('click', removePopUp);
+        sidebar.removeEventListener('click', popRegisterSidebarDel);
+        button_register.classList.remove("active");
+    }
+
+    // Função para adicionar o pop-up
+    function addPopUp() {
+        button_register.classList.add("active");
+        pop_up.classList.add("pop-up__pop-up-register");
+        pop_up_register = document.createElement("div");
+        pop_up_register.innerHTML = `
+            <div class="pop-up-register__buttons pay-bill">
+                <button type="button" class="button md-fba-small">
+                    <span class="material-symbols-outlined md-fba-icon">
+                        payments
+                    </span>
+                </button>
+                <button type="button" class="button button-text">Pagar fatura</button>
+            </div>
+            <div class="pop-up-register__buttons add-purchase">
+                <button type="button" class="button md-fba-small">
+                    <span class="material-symbols-outlined icon md-fba-icon">
+                        shopping_cart
+                    </span>
+                </button>
+                <button type="button" class="button button-text">Nova compra</button>
+            </div>
+        `;
+
+        pop_up_register.classList.add("pop-up-register");
+        container_button_register.appendChild(pop_up_register);
+
+        const pay_bill_button = pop_up_register.querySelector('.pay-bill');
+        const add_purchase_button = pop_up_register.querySelector('.add-purchase');
+
+        pay_bill_button.addEventListener('click', function() {
+            removePopUp()
+            console.log('Botão de pagar fatura clicado');
+        });
+        add_purchase_button.addEventListener('click', function() {
+            removePopUp()
+            pop_up.classList.add("active")
+            const window = windowPopUp("Nova compra")
+            window.innerHTML += `
+            <form class="credit-card-bills__register-purchase"> 
+                <div class="credit-card-bills__form-element">
+                    <label for="descriptionPurchase">Descrição</label>
+                    <input type="text" class="descriptionPurchase" name="descriptionPurchase" required>
+                </div>
+
+                <div class="credit-card-bills__form-element">
+                    <label for="datePurchase">Data</label>
+                    <input type="date" class="datePurchase" name="datePurchase" required>
+                </div>
+
+                <div class="credit-card-bills__form-element">
+                    <label for="valuePurchase">Preço</label>
+                    <input type="number" class="valuePurchase" name="valuePurchase" required>
+                </div>
+
+                <div class="credit-card-bills__form-element">
+                    <label for="categoriaPurchase">Categoria</label>
+                    <select class="categoriaPurchase" name="categoriaPurchase"></select>
+                </div>
+                
+                <div class="credit-card-bills__register-purchase-customers">
+                    <div class="register-purchase-customers__container-header">
+                        <label>Cliente</label>
+                        <button type="button" class="register-purchase-customers__register-customers-button">
+                            <span class="material-symbols-outlined icon button-icon">add</span>
+                            <span class="button-text">Cadastrar cliente</span>
+                        </button>
+                    </div>
+                    <select class="customersPurchase"></select>
+                    <button type="button" class="register-purchase-customers__new-customers-button">
+                        <span class="material-symbols-outlined icon button-icon">add</span>
+                        <span class="button-text">Adicionar mais clientes</span>
+                    </button>
+                </div>
+            </form>
+            `
+            pop_up.appendChild(window)
+        });
+
+        // Adicionar evento de clique para remover o pop-up
+        pop_up.addEventListener("click", removePopUp);
+        // Adicionar evento de clique na barra lateral para remover o pop-up
+        sidebar.addEventListener("click", popRegisterSidebarDel);
+    }
+
+    if (pop_up_register) {
+        removePopUp();
+    } else {
+        addPopUp();
+    }
+
+    // Função para remover o pop-up se o clique ocorrer fora da área do botão
+    function popRegisterSidebarDel(e) {
+        if (e.target != container_button_register && !container_button_register.contains(e.target)) {
+            removePopUp();
+        }
+    }
+})

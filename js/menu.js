@@ -12,7 +12,7 @@ window.addEventListener('scroll', () => {
 
 var sidebar = document.querySelector(".sidebar")
 var sidebar__button = sidebar.querySelector(".sidebar__button")
-var sidebar__button_register = sidebar.querySelector(".sidebar__button_register")
+var sidebar__button_register = sidebar.querySelector(".sidebar__button-register")
 var sidebar__button_register
 
 sidebar__button.addEventListener("click", () => {
